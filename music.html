@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,600;0,800;1,400&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>HeartBeats Songs</title>
+    <script>function toggleTable() {
+            console.log("delay")
+            console.log("delay")
+            document.getElementById("musictable").classList.toggle("hidden");
+
+        }</script>
+</head>
+
+<body>
+    <button onclick="setTimeout(toggleTable,5000)" class="spotifyButton">Predict Emotion</button>
+    <div id="musictable" class="hidden">
+    <p class="emotion"> The predicted emotion is : <b>{{emotion}}</b> </p>
+    <table>
+        <tr>
+            <th>Name</th>
+            
+            <th>Artist</th>
+            <th>Duration(ms)</th>
+            <th>Preview</th>
+        </tr>
+        {% for track in tracks %}
+        <tr>
+            <td>{{ track['name'] }}</td>
+            <td>{{ track['artist'] }}</td>
+            <td>{{ track['duration_ms']}}</td>
+            <td>
+                <audio controls>
+                    <source src="{{ track['preview_url'] }}" type="audio/mpeg">
+                </audio>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    </div>
+</body>
+
+</html>
